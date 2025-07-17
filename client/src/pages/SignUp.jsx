@@ -1,0 +1,19 @@
+import React from "react";
+import axios from 'axios';
+import FormComp from "../components/FormComp";
+
+function SignUp() {
+    function handleLogin(data){
+        const {email, password} = data;
+        axios.post("http://localhost:3000/api/register", {email, password})
+        .then(res => console.log(res))
+        .catch(error => console.log(error))
+    }
+  return (
+    <div className="min-h-screen flex flex-col justify-center items-center dark:text-white dark:bg-gray-950">
+      <FormComp formData={handleLogin} buttonText="SignUp" />
+    </div>
+  );
+}
+
+export default SignUp;
