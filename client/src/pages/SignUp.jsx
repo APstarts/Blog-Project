@@ -5,13 +5,13 @@ import FormComp from "../components/FormComp";
 function SignUp() {
     function handleLogin(data){
         const {email, name, surname, password} = data;
-        axios.post("http://localhost:3000/api/register", {email, name, surname, password})
+        axios.post("http://localhost:5000/api/register", {email, name, surname, password})
         .then(res => console.log(res))
         .catch(error => console.log(error))
     }
   return (
     <div className="min-h-screen flex flex-col justify-center items-center dark:text-white dark:bg-gray-950">
-      <FormComp formData={handleLogin} buttonText="SignUp" />
+      <FormComp formData={handleLogin} buttonText="Sign Up" />
     </div>
   );
 }
