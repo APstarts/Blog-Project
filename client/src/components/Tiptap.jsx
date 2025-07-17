@@ -4,7 +4,7 @@ import { CharacterCount } from "@tiptap/extensions";
 import { useEffect, useState } from "react";
 import "prosemirror-view/style/prosemirror.css";
 
-const limit = 280;
+const limit = 5000;
 
 function Tiptap({ onEditorContentPost }) {
   const editor = useEditor({
@@ -51,7 +51,7 @@ function Tiptap({ onEditorContentPost }) {
 
   return (
     <div>
-      <div className="w-full max-w-screen-sm mx-auto px-4 overflow-x-hidden">
+      <div className="w-full max-w-screen-sm mx-auto overflow-x-hidden">
         <EditorContent editor={editor} />
         <div
           className={`flex gap-2 h-8 items-center mt-2 border-t border-gray-200 character-count ${
