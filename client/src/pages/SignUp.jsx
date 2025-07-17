@@ -4,8 +4,8 @@ import FormComp from "../components/FormComp";
 
 function SignUp() {
     function handleLogin(data){
-        const {email, password} = data;
-        axios.post("http://localhost:3000/api/register", {email, password})
+        const {email, name, surname, password} = data;
+        axios.post("http://localhost:3000/api/register", {email, name, surname, password})
         .then(res => console.log(res))
         .catch(error => console.log(error))
     }
