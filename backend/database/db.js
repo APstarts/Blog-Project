@@ -6,7 +6,10 @@ const db = new pg.Client({
     user: DB_USER,
     password: DB_PASSWORD,
     database: DB_DATABASE,
-    port: DB_PORT
+    port: DB_PORT,
+    ssl: {
+        require: true,
+    }
 });
 
 export default db;
