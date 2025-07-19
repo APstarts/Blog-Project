@@ -7,6 +7,7 @@ import authRoute from './routes/authRoutes.js';
 db.connect(error => {
     if(error){
         console.log(error);
+        return;
     }
     console.log("Database connected successfully.");
 });
