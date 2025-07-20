@@ -1,21 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import parse from 'html-react-parser';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Feed() {
   const [content, setContent] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const fromLocalStorage = localStorage.getItem("blogPost");
-
-    if (fromLocalStorage) {
-      try {
-        const parsed = JSON.parse(fromLocalStorage);
-        setContent(parsed);
-      } catch (err) {
-        console.error("Failed to parse blogPost from localStorage:", err);
-        setContent(null);
-      }
+    const token = localStorage.getItem("token");
+    try {
+      axios.get("http://localhost/5000/api/feed", {headers: {
+        Authorization: `Bearer ${token}`
+      }})
+      .then(res => {
+        console.log(res)
+      })
+    } catch (error) {
+      console.log("Feed page error: ", error);
+      navigate("/");
     }
   }, []);
 

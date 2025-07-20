@@ -5,6 +5,7 @@ import Feed from './pages/Feed';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import NewPost from './pages/NewPost';
+import Profile from './pages/Profile';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path='/login' element={<Login />}/>
           <Route path='/register' element={<SignUp />}/>
           <Route path='/newpost' element={<NewPost />}/>
+          <Route path='/profile' element={<Profile />}/>
         </Routes>
       </Router>
     </>
