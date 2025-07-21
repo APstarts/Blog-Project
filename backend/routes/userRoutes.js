@@ -23,6 +23,21 @@ userRoute.get("/feed", async (req, res) => {
     }
 });
 
+//self profile page route
+userRoute.get("/self_profile", async (req, res) => {
+    const userId = req.user.id;
+    try {
+        const result = await db.query("SELECT users.id AS user_id, users.name, users.surname, posts.title, posts.content, posts.created_at FROM posts INNER JOIN users ON posts.author_id=users.id WHERE users.id=1", [userId]);
+        const user = result.rows[0];
+        if(!user){
+            return res.status(404).json({message: "User not found"});
+        }
+        return res.status(200).json({message: "User profile fetched", user});
+    } catch (error) {
+        return res.status(500).json({message: `Internal server error: ${error}`});
+    }
+});
+
 userRoute.post("/newpost", async (req, res) => {
     const userId = req.user.id;
     const {title, post_Content} = req.body;
