@@ -24,7 +24,7 @@ function Profile() {
         </div>
         <div>
             <div className='px-10 flex flex-col gap-2 mt-2'>
-                <p>Bio: 'Hello there!'</p>
+                <p>Bio: 'Hello there! How you doing?'</p>
                 <div>
                     followers:
                 </div>
