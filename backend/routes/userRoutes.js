@@ -73,6 +73,11 @@ userRoute.post("/newpost", async (req, res) => {
     }
 })
 
+//search route
+userRoute.get("/search", (req, res) => {
+    console.log(req.query);
+})
+
 //user verification route
 userRoute.get("/verify", async (req, res) => {
     return res.status(200).json({message: "User verified"});
