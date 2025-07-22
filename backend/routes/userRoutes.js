@@ -27,7 +27,7 @@ userRoute.get("/feed", async (req, res) => {
 userRoute.get("/self_profile", async (req, res) => {
     const userId = req.user.id;
     try {
-        const result = await db.query("SELECT users.id AS user_id, users.name, users.surname, posts.title, posts.content, posts.created_at FROM posts INNER JOIN users ON posts.author_id=users.id WHERE users.id=1", [userId]);
+        const result = await db.query("SELECT users.id AS user_id, users.name, users.surname, posts.title, posts.content, posts.created_at FROM posts INNER JOIN users ON posts.author_id=users.id WHERE users.id=$1", [userId]);
         const user = result.rows[0];
         if(!user){
             return res.status(404).json({message: "User not found"});
@@ -37,6 +37,26 @@ userRoute.get("/self_profile", async (req, res) => {
         return res.status(500).json({message: `Internal server error: ${error}`});
     }
 });
+
+//other users profile page
+userRoute.get("/users/:id", async (req, res) => {
+    const userId = req.params.id;
+    
+    try {
+        const result = await db.query("SELECT users.id AS user_id, users.name, users.surname, posts.title, posts.content, posts.created_at FROM posts INNER JOIN users ON posts.author_id=users.id WHERE users.id=$1", [userId])
+        const profileData = result.rows;
+        
+        if(!profileData){
+            return res.status(409).json({message: `No data found for the selected user`});
+        }
+
+        return res.status(200).json({message: `Queried user data fetched.`, profileData});
+        
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({message: `Internal server error: ${error}`});
+    }
+})
 
 userRoute.post("/newpost", async (req, res) => {
     const userId = req.user.id;
