@@ -6,6 +6,8 @@ const userRoute = Router();
 
 userRoute.use(passport.authenticate("jwt", {session: false})); //authenticating all the user routes at once.
 
+
+//feed route and logic to get all the posts.
 userRoute.get("/feed", async (req, res) => {
     const userId = req.user.id;
     const result = await db.query("SELECT * FROM posts WHERE author_id = $1", [userId]);
@@ -58,6 +60,7 @@ userRoute.get("/users/:id", async (req, res) => {
     }
 })
 
+//route and logic for new post
 userRoute.post("/newpost", async (req, res) => {
     const userId = req.user.id;
     const {title, post_Content} = req.body;
