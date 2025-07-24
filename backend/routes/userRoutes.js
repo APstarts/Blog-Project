@@ -76,12 +76,18 @@ userRoute.post("/newpost", async (req, res) => {
 //search route
 // Full-text search route
 userRoute.get("/search", async (req, res) => {
-    const { q } = req.query;
+    const { q } = req.query; //because we are using query params, we can access the search query using req.query.q as in frontend we are doing search?q=hello+world
 
+
+    //validate the search query
     if (!q || q.trim() === "") {
         return res.status(400).json({ message: "Search query is missing." });
     }
 
+    // in case there is a query then we will convert the query to a tsquery format
+    // for example, if the query is "hello world" then we will convert it to
+    // "hello & world" so that it can be used in the PostgreSQL full-text
+    // search query.
     try {
         // Convert input "hello world" → "hello & world"
         const tsQuery = q.trim().split(/\s+/).join(' & ');
