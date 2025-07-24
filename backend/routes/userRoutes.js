@@ -74,9 +74,34 @@ userRoute.post("/newpost", async (req, res) => {
 })
 
 //search route
-userRoute.get("/search", (req, res) => {
-    console.log(req.query);
-})
+// Full-text search route
+userRoute.get("/search", async (req, res) => {
+    const { q } = req.query;
+
+    if (!q || q.trim() === "") {
+        return res.status(400).json({ message: "Search query is missing." });
+    }
+
+    try {
+        // Convert input "hello world" → "hello & world"
+        const tsQuery = q.trim().split(/\s+/).join(' & ');
+
+        const result = await db.query(`
+            SELECT posts.id, posts.title, posts.content, posts.created_at,
+                   users.id AS user_id, users.name, users.surname
+            FROM posts
+            INNER JOIN users ON posts.author_id = users.id
+            WHERE posts.search_vector @@ to_tsquery('english', $1)
+            ORDER BY posts.created_at DESC
+        `, [tsQuery]);
+
+        return res.status(200).json(result.rows);
+    } catch (error) {
+        console.error("Search error:", error);
+        return res.status(500).json({ message: "Internal server error." });
+    }
+});
+
 
 //user verification route
 userRoute.get("/verify", async (req, res) => {
