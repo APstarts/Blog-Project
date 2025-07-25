@@ -108,6 +108,32 @@ userRoute.get("/search", async (req, res) => {
     }
 });
 
+//need to update
+userRoute.get("/post/:id", async (req, res) => {
+  const postId = req.params.id;
+
+  try {
+    const result = await db.query(`
+      SELECT posts.id, posts.title, posts.content, posts.created_at,
+             users.id AS user_id, users.name, users.surname
+      FROM posts
+      JOIN users ON posts.author_id = users.id
+      WHERE posts.id = $1
+    `, [postId]);
+
+    const post = result.rows[0];
+
+    if (!post) {
+      return res.status(404).json({ message: "Post not found." });
+    }
+
+    res.status(200).json(post);
+  } catch (err) {
+    console.error("Error fetching post:", err);
+    res.status(500).json({ message: "Internal server error." });
+  }
+});
+
 
 //user verification route
 userRoute.get("/verify", async (req, res) => {
