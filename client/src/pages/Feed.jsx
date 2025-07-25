@@ -23,18 +23,18 @@ function Feed() {
         Authorization: `Bearer ${token}`
       }
     })
-    .then(res => {
-      if (res.status === 200) {
-        const posts = res.data.contents;
-        if (posts && posts.length > 0) {
-          setContent(posts[0]); // default to showing first post when page loads
+      .then(res => {
+        if (res.status === 200) {
+          const posts = res.data.contents;
+          if (posts && posts.length > 0) {
+            setContent(posts[0]); // default to showing first post when page loads
+          }
         }
-      }
-    })
-    .catch(error => {
-      console.log("Feed page error: ", error);
-      navigate("/");
-    });
+      })
+      .catch(error => {
+        console.log("Feed page error: ", error);
+        navigate("/");
+      });
   }, []);
 
   const handleSearch = () => {
@@ -46,12 +46,12 @@ function Feed() {
         Authorization: `Bearer ${token}`
       }
     })
-    .then(res => {
-      setSearchResults(res.data);
-    })
-    .catch(err => {
-      console.error("Search error:", err);
-    });
+      .then(res => {
+        setSearchResults(res.data);
+      })
+      .catch(err => {
+        console.error("Search error:", err);
+      });
   };
 
   const handleKeyDown = (e) => {
@@ -85,13 +85,16 @@ function Feed() {
         <div className="search-results p-4 md:px-52 space-y-4">
           {searchResults.length > 0 ? (
             searchResults.map(post => (
-              <div key={post.id} className="post-container border border-gray-200 p-4 rounded-lg shadow">
-                <div className="text-2xl font-bold mb-2">{post.title}</div>
-                <div className="text-sm text-gray-400 mb-2">by {post.name} {post.surname}</div>
-                <div className="prose dark:prose-invert max-w-none">
-                  {parse(post.content || '')}
+              <Link to={`/post/${post.id}`}>
+                <div className="post-container border border-gray-200 p-4 rounded-lg shadow hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer transition">
+                  <div className="text-2xl font-bold mb-2">{post.title}</div>
+                  <div className="text-sm text-gray-400 mb-2">by {post.name} {post.surname}</div>
+                  <div className="prose dark:prose-invert max-w-none">
+                    {parse(post.content || '')}
+                  </div>
                 </div>
-              </div>
+              </Link>
+
             ))
           ) : (
             <div className="text-gray-400">No matching posts.</div>
