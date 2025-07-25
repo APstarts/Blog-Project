@@ -6,7 +6,7 @@ function Navbar() {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
 
-  function handleLogout(){
+  function handleLogout() {
     localStorage.removeItem("token");
     navigate("/login");
   }
@@ -19,7 +19,7 @@ function Navbar() {
         </h1>
 
         {/* Desktop Nav */}
-        <ul className="hidden md:flex gap-5 text-xl">
+        <ul className="hidden md:flex gap-5 text-xl items-center">
           <li>
             <NavLink
               to="/feed"
@@ -56,12 +56,16 @@ function Navbar() {
               Profile
             </NavLink>
           </li>
-          <li className="p-2 cursor-pointer hover:text-red-600 dark:text-blue-300 hover:dark:text-blue-100 hover:bg-gray-100">
-            <button onClick={handleLogout} className="bg-transparent border-none outline-none p-0 m-0 text-inherit cursor-pointer">
+          <li>
+            <button
+              onClick={handleLogout}
+              className="p-2 cursor-pointer text-blue-800 dark:text-blue-300 hover:text-red-600 hover:dark:text-blue-100 hover:bg-gray-100"
+            >
               Logout
             </button>
           </li>
         </ul>
+
         {/* Mobile Hamburger */}
         <div
           className="text-3xl md:hidden cursor-pointer"
