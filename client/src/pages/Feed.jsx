@@ -86,7 +86,7 @@ function Feed() {
           {searchResults.length > 0 ? (
             searchResults.map(post => (
               <Link to={`/post/${post.id}`}>
-                <div className="post-container border border-gray-200 p-4 rounded-lg shadow hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer transition">
+                <div className="post-container border border-gray-200 p-4 rounded-lg shadow hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer transition" key={post.id}>
                   <div className="text-2xl font-bold mb-2">{post.title}</div>
                   <div className="text-sm text-gray-400 mb-2">by {post.name} {post.surname}</div>
                   <div className="prose dark:prose-invert max-w-none">
