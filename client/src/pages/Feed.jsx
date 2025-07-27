@@ -85,12 +85,12 @@ function Feed() {
         <div className="search-results p-4 md:px-52 space-y-4">
           {searchResults.length > 0 ? (
             searchResults.map(post => (
-              <Link to={`/post/${post.id}`}>
-                <div className="post-container border border-gray-200 p-4 rounded-lg shadow hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer transition" key={post.id}>
+              <Link to={`/post/${post.id}`} key={post.id}>
+                <div className="post-container border border-gray-200 p-4 rounded-lg shadow hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer transition">
                   <div className="text-2xl font-bold mb-2">{post.title}</div>
-                  <div className="text-sm text-gray-400 mb-2">by {post.name} {post.surname}</div>
-                  <div className="prose dark:prose-invert max-w-none">
-                    {parse(post.content || '')}
+                  <div className='flex justify-between'>
+                    <div className="text-sm text-gray-400 mb-2">by {post.name} {post.surname}</div>
+                    <div></div>
                   </div>
                 </div>
               </Link>

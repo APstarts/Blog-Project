@@ -45,7 +45,7 @@ userRoute.get("/users/:id", async (req, res) => {
     const userId = req.params.id;
     
     try {
-        const result = await db.query("SELECT users.id AS user_id, users.name, users.surname, posts.title, posts.content, posts.created_at FROM posts INNER JOIN users ON posts.author_id=users.id WHERE users.id=$1", [userId])
+        const result = await db.query("SELECT users.id AS user_id, users.name, users.surname, posts.id AS post_id, posts.title, posts.content, posts.created_at FROM posts INNER JOIN users ON posts.author_id=users.id WHERE users.id=$1", [userId])
         const profileData = result.rows;
         
         if(!profileData){

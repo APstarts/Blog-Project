@@ -18,7 +18,7 @@ function App() {
           <Route path='/login' element={<Login />}/>
           <Route path='/register' element={<SignUp />}/>
           <Route path='/newpost' element={<NewPost />}/>
-          <Route path='/profile' element={<Profile />}/>
+          <Route path='/profile/:id' element={<Profile />}/>
           <Route path='/post/:id' element={<PostPage />}/>
         </Routes>
       </Router>

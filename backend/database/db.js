@@ -7,7 +7,7 @@ const pool = new pg.Pool({
     password: DB_PASSWORD,
     database: DB_DATABASE,
     port: DB_PORT,
-    ssl: { require: true }
+    ssl: { rejectUnauthorized: false }
 });
 
 // Add error handler so you don't crash on DB drop:
