@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from '../components/Navbar';
 import parse from 'html-react-parser';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
@@ -60,7 +59,6 @@ function Feed() {
 
   return (
     <div className="dark:text-white">
-      <Navbar />
 
       {/* Search bar */}
       <div className="search-box p-4 md:px-52 flex gap-2 items-center">

@@ -7,11 +7,13 @@ import SignUp from './pages/SignUp';
 import NewPost from './pages/NewPost';
 import Profile from './pages/Profile';
 import PostPage from './pages/PostPage';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <>
       <Router>
+        <Navbar />
         <Routes>
           <Route path='/' element={<Landing />}/>
           <Route path='/feed' element={<Feed />}/>

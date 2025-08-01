@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import parse from "html-react-parser";
-import Navbar from "../components/Navbar";
 
 function PostPage() {
   const { id } = useParams();
@@ -32,7 +31,6 @@ function PostPage() {
 
   return (
     <>
-      <Navbar />
       <div className="dark:text-white px-4 sm:px-10 md:px-20 lg:px-40 xl:px-80 mt-6">
         <div className="space-y-4">
           <h1 className="text-2xl sm:text-3xl font-semibold">{post.title}</h1>
